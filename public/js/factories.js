@@ -22,7 +22,7 @@ angular.module('resistanceFactories', [])
 				  checked = true;
 			  	  $http.get('/get_loggedin_soldier.json')
 			  	  .success(function(data){
-					  status = data.soldier != {} ? true : false;
+					  status = jQuery.isEmptyObject(data.soldier) ? false : true;
 			  		  return status;
 			  	  })
 				  .error(function(data){
