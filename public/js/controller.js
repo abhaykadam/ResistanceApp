@@ -182,7 +182,7 @@ resistanceControllers.controller('LoginCtrl', function($scope, $http, $location,
 					Login.setStatus(true);
 					this.loggedIn = Login.getStatus();
 			        $location.path('/posts');
-				} else if (response.status = "logged_in") {
+				} else if (response.status == "logged_in") {
 					Login.setStatus(true);
 					this.loggedIn = Login.getStatus();
 					dialogs.notify('Notification', 'User already logged in');
