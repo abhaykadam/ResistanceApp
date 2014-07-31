@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h1>Sign Up</h1>
+      
+      <form name="signupForm" ng-submit="signup()" novalidate role="form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" ng-model="name" placeholder="Enter Name" 
+            required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" ng-model="email" placeholder="Enter email" 
+            required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" ng-model="password" placeholder="Password" 
+            required>
+        </div>
+        
+        <div class="form-group" ng-class="signupForm.confirmPassword.$error.validator ? 'has-error has-feedback' : ''">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" class="form-control" name="confirmPassword" ng-model="confirmPassword" 
+              placeholder="Confirm Password" 
+              ui-validate-watch="'password'" ui-validate="'$value==password'" required>
+          <span ng-show="signupForm.confirmPassword.$error.validator"
+              class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
+        
+        <div class="form-group">
+          <label for="text">Rank</label>
+          <input type="text" class="form-control" ng-model="rank" placeholder="Enter Rank" 
+            required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+      </form>
+    <div>
+  </div>
+</div>

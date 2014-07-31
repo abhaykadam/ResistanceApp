@@ -1,0 +1,19 @@
+body {
+	max-width: 900px;
+	margin: 0 auto;
+	position: relative; /* Fix for absolute positioning */
+}
+
+.btn-no-pad {
+	padding: 0;
+}
+
+.btn-no-vert-pad {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+textarea { 
+	resize:none; 
+}
+
