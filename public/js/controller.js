@@ -26,7 +26,7 @@ resistanceControllers.controller('PostCtrl', function($scope, $http, $filter, di
 	  });
   }
   
-  $scope.showPublicMessages = function() {
+  this.showPublicMessages = function() {
 	  $scope.posts = [];
 	  $scope.bookmark = undefined;
 	  $scope.getPosts();
