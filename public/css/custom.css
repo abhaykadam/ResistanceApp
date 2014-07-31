@@ -20,3 +20,7 @@ textarea {
 a, .btn-no-link{
     text-decoration: none !important;
 }
+
+.full-width {
+	width: 100%;
+}
