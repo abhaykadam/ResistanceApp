@@ -17,3 +17,6 @@ textarea {
 	resize:none; 
 }
 
+a, .btn-no-link{
+    text-decoration: none !important;
+}

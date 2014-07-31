@@ -48,18 +48,10 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" ng-controller='PostCtrl as posts'
-          ng-click="posts.showPublicMessages()">
+        <a class="navbar-brand"
+          ng-click="main.goToPosts()">
           The Resistance
         </a>
-      </div>
-    
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li ng-controller="LoginStatusCtrl" ng-hide="Login.getStatus()">
-            <a go-click="/signup">Sign up for the Resistance</a>
-          </li>
-        </ul>
       </div>
     </div>
   </div>
@@ -67,6 +59,15 @@
   <section ng-view>
   
   </section>
+  
+
+  <!-- Menu Toggle Script -->
+  <script>  
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+  </script>
   
 </body>
 </html>

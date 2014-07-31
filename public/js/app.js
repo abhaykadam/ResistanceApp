@@ -40,6 +40,10 @@ var resistanceControllers = angular.module('resistanceControllers', []);
 resistanceControllers.controller('MainCtrl', function ($scope, Page) {
       $scope.Page = Page;
 	  $scope.Page.goToMain();
+	  
+	  this.goToPosts = function () {
+		  $scope.Page.postsScope().showPublicMessages();
+	  }
 });
 
 resistanceControllers.controller('LoginStatusCtrl', function ($scope, Login) {

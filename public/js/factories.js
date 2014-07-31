@@ -3,12 +3,19 @@
 angular.module('resistanceFactories', [])
 	.factory('Page', function ($location) {
 		var first = 'true';
+		var _postsScope = null;
 		return {
 			goToMain: function() {
 				if(first) {
 					$location.path('/posts');
 					first = false;
 				}
+			},
+			setPostsScope: function(_scope) {
+				_postsScope = _scope;
+			},
+			postsScope: function() {
+				return _postsScope;
 			}
 		};
 	}).factory('Login', function ($location, $http) {

@@ -1,4 +1,7 @@
-resistanceControllers.controller('PostCtrl', function($scope, $http, $filter, dialogs, Login, $location) {
+'use strict';
+
+resistanceControllers.controller('PostCtrl', function($scope, $http, $filter, dialogs, Login, $location, Page) {
+  Page.setPostsScope($scope);	
   $scope.posts = [];
   $scope.bookmark = undefined;
 	
@@ -26,10 +29,11 @@ resistanceControllers.controller('PostCtrl', function($scope, $http, $filter, di
 	  });
   }
   
-  this.showPublicMessages = function() {
+  $scope.showPublicMessages = function() {
 	  $scope.posts = [];
 	  $scope.bookmark = undefined;
 	  $scope.getPosts();
+	  $location.path('/posts');
   }
   
   $scope.showSavedMessages = function() {
@@ -41,7 +45,7 @@ resistanceControllers.controller('PostCtrl', function($scope, $http, $filter, di
   $scope.approve = function(post_id) {
 	  $http.post('/posts/' + post_id + '/approve.json', {})
 	  .success(function(data){
-	  	post = $filter('filter')($scope.posts, {id: post_id}, true)[0];
+	  	var post = $filter('filter')($scope.posts, {id: post_id}, true)[0];
 		post.approved = data.count;
 	  });
   };
@@ -49,7 +53,7 @@ resistanceControllers.controller('PostCtrl', function($scope, $http, $filter, di
   $scope.disapprove = function(post_id) {
 	  $http.post('/posts/' + post_id + '/disapprove.json', {})
 	  .success(function(data){
-	  	post = $filter('filter')($scope.posts, {id: post_id}, true)[0];
+	  	var post = $filter('filter')($scope.posts, {id: post_id}, true)[0];
 		post.disapproved = data.count;
 	  });
   };
@@ -64,7 +68,7 @@ resistanceControllers.controller('PostCtrl', function($scope, $http, $filter, di
 	  .success(function(data){
 		  $scope.soldier = data.soldier;
 		  
-		  post = $filter('filter')($scope.posts, {id: post_id}, true)[0];
+		  var post = $filter('filter')($scope.posts, {id: post_id}, true)[0];
 		  post.add_comment = true;
 	  });
   }
@@ -119,10 +123,10 @@ resistanceControllers.controller('PostCtrl', function($scope, $http, $filter, di
   }
   
   $scope.cancelComment = function (post_id) {
-	  post = $filter('filter')($scope.posts, {id: post_id}, true)[0];
+	  var post = $filter('filter')($scope.posts, {id: post_id}, true)[0];
 	  post.add_comment = false;
 	  
-	  soldier = undefined;
+	  $scope.soldier = undefined;
   }
   
   $scope.broadcast = function() {
@@ -165,7 +169,6 @@ resistanceControllers.controller('customDialogCtrl',function($log,$scope,$modalI
   }) // end customDialogCtrl
 
 resistanceControllers.controller('LoginCtrl', function($scope, $http, $location, $translate, dialogs, Login) {
-	this.loggedIn = Login.getStatus();
     $scope.login = function login() {
 		$scope.$broadcast("autofill:update");
 
@@ -180,11 +183,9 @@ resistanceControllers.controller('LoginCtrl', function($scope, $http, $location,
 			        dialogs.error('Error', 'Login failed...');
 			    else if (response.status == "success") {
 					Login.setStatus(true);
-					this.loggedIn = Login.getStatus();
 			        $location.path('/posts');
 				} else if (response.status == "logged_in") {
 					Login.setStatus(true);
-					this.loggedIn = Login.getStatus();
 					dialogs.notify('Notification', 'User already logged in');
 					$location.path('/posts');
 			    } else
@@ -206,7 +207,6 @@ resistanceControllers.controller('LoginCtrl', function($scope, $http, $location,
 		.success(function (response) {
 		    if (response.status == "success") {
 				Login.setStatus(false);
-				this.loggedIn = Login.getStatus();
 				dialogs.notify('Notify', 'Successfully logged out')
 		    } else
 		        dialogs.error('Error', "Can't logout...");
