@@ -229,16 +229,17 @@ resistanceControllers.controller('SignupCtrl', function($scope, $http, $location
 				'rank': $scope.rank
             })
 			.success(function (response) {
-			    if (!response || response == "")
+			    if (!response || response == "") {
 			        dialogs.error('Error', 'Signing up failed...');
-				else if (response.status == "logged_in")
-				        dialogs.notify('Notify', 'You are already signed in');
-				else if (response.status == "success")
+				} else if (response.status == "logged_in") {
+			        dialogs.notify('Notify', 'You are already signed in');
+					$location.path('/posts');
+				} else if (response.status == "success") {
 			        dialogs.notify('Notify', 'You are successfully signed up for the resistance');
-				else
+					$location.path('/posts');
+				} else {
 			        dialogs.error('Error', response.status);
-					
-				$location.path('/posts');
+				}
 			})
         	.error(function (data) {
         	    dialogs.error('Error', "Can't contact server...");

@@ -10,10 +10,10 @@ class Soldier
   include DataMapper::Resource
   
   property :id,         Serial
-  property :name,       String
-  property :email,      String
-  property :password,   String
-  property :rank,       String
+  property :name,       String, :required => true
+  property :email,      String, :required => true, :unique => true
+  property :password,   String, :required => true
+  property :rank,       String, :required => true
   
   has n, :posts
   has n, :comments
@@ -233,10 +233,11 @@ post '/signup.json' do
   soldier.rank = rank
   
   soldier.save
+
   if soldier.saved?
     MultiJson.dump(status: 'success')
   else
-    MultiJson.dump(status: 'Invalid email/password')
+    MultiJson.dump(status: soldier.errors.first)
   end
 end
 
