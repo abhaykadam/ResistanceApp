@@ -134,7 +134,7 @@ resistanceControllers.controller('PostCtrl', function($scope, $http, $filter, di
 	  var dlg = dialogs.create('/dialogs/custom.html','customDialogCtrl',$scope.data);
 	        dlg.result.then(function(data){
 	          $scope.data = data;
-			  $scope.getPosts();
+			  $scope.showPublicMessages();
 	        });
   }
 }).run(function($templateCache){
